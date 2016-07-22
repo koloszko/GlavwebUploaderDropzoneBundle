@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="glavweb_uploader.form.type.dropzone" class="Glavweb\UploaderDropzoneBundle\Form\Type\DropzoneType">
+            <argument type="service" id="router" />
+            <argument type="service" id="glavweb_uploader.media_helper" />
+            <argument>%glavweb_uploader.config%</argument>
+            <argument type="service" id="glavweb_uploader.data_driver.annotation" />
+            <argument type="service" id="translator" />
+            <tag name="form.type" alias="glavweb_uploader_dropzone" />
+        </service>
+
+    </services>
+</container>

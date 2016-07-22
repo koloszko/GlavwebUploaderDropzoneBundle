@@ -1,6 +1,6 @@
 {
-    "name": "glavweb/dropzone-bundle",
-    "description": "Symfony GlavwebDropzoneBundle",
+    "name": "glavweb/uploader-dropzone-bundle",
+    "description": "Symfony GlavwebUploaderDropzoneBundle",
     "authors": [
         {
             "name": "Andrey Nilov",
@@ -9,14 +9,15 @@
         },
         {
             "name": "Glavweb Community",
-            "homepage": "https://github.com/glavweb/GlavwebDropzoneBundle/contributors"
+            "homepage": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle/contributors"
         }
     ],
     "require": {
         "symfony/http-foundation": "~2.3|~3.0",
-        "symfony/form": "~2.3|~3.0"
+        "symfony/form": "~2.3|~3.0",
+        "glavweb/uploader-bundle": "~1.0"
     },
     "autoload": {
-        "psr-4": { "Glavweb\\DropzoneBundle\\": "" }
+        "psr-4": { "Glavweb\\UploaderDropzoneBundle\\": "" }
     }
 }

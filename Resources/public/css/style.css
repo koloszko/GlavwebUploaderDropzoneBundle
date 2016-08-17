@@ -1,40 +1,699 @@
-#actions {
-    margin: 15px 0;
-}
-
-/* Mimic table appearance */
-div.table {
+.b-table {
+    width: 100%;
+    height: 100%;
     display: table;
+    text-align: center;
 }
-div.table .file-row {
-    display: table-row;
-}
-div.table .file-row > div {
+.b-table-cell {
     display: table-cell;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-    padding: 8px;
+    vertical-align: middle;
 }
-div.table .file-row:nth-child(odd) {
-    background: #f9f9f9;
+.row-np > [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
-
-/* Hide the progress bar when finished */
-#previews .file-row.dz-success .progress {
-    opacity: 0;
-    transition: opacity 0.3s linear;
+.row-np-all [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
-
-/* Hide the delete button initially */
-#previews .file-row .delete {
-    display: none;
+.gwu.gwu-dropzone .gwu-dropzone-area {
+    padding: 60px 40px;
+    background-color: #CACACA;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
 }
-
-/* Hide the start and cancel buttons and show the delete button */
-#previews .file-row.dz-success .start,
-#previews .file-row.dz-success .cancel {
-    display: none;
+.gwu.gwu-dropzone .gwu-previews {
+    min-height: inherit;
+    overflow: hidden;
+    border: none;
+    -webkit-border-radius: 0;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 0;
+    -moz-background-clip: padding;
+    border-radius: 0;
+    background-clip: padding-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin: 30px -15px 0 -15px;
+    padding: 0;
 }
-#previews .file-row.dz-success .delete {
+.gwu.gwu-dropzone .gwu-preview {
+    position: relative;
     display: block;
+    float: left;
+    margin: 0 0 30px 0;
+    width: 100%;
+    padding: 0 15px;
+}
+.gwu.gwu-dropzone .gwu-preview__image {
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 8px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 8px;
+    -moz-background-clip: padding;
+    border-radius: 8px;
+    background-clip: padding-box;
+}
+.gwu.gwu-dropzone .gwu-preview__details {
+    height: 100%;
+    padding: 30px;
+}
+.gwu.gwu-dropzone .gwu-preview-img {
+    max-width: 100%;
+}
+.gwu.gwu-dropzone .gwu-preview-details {
+    position: relative;
+}
+.gwu.gwu-dropzone .gwu-preview-details__remove {
+    position: absolute;
+    bottom: 10px;
+    left: 25px;
+}
+.gwu.gwu-dropzone .gwu-preview-details__rename {
+    position: absolute;
+    bottom: 10px;
+    right: 25px;
+}
+@media (min-width: 480px) {
+    .gwu.gwu-dropzone .gwu-preview {
+        width: 50%;
+    }
+}
+@media (min-width: 768px) {
+    .gwu.gwu-dropzone .gwu-preview {
+        width: 33.3%;
+    }
+}
+@media (min-width: 992px) {
+    .gwu.gwu-dropzone .gwu-preview {
+        width: 25%;
+    }
+}
+@media (min-width: 1200px) {
+    .gwu.gwu-dropzone .gwu-preview {
+        width: 20%;
+    }
+}
+@media (min-width: 1600px) {
+    .gwu.gwu-dropzone .gwu-preview {
+        width: 16.6%;
+    }
+}
+.gwu-popup {
+    width: 450px;
+    margin-right: 0;
+    height: 400px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.gwu-form .form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 4px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 4px;
+    -moz-background-clip: padding;
+    border-radius: 4px;
+    background-clip: padding-box;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    -moz-transition: border-color ease-in-out 0.15s, -moz-box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.gwu-form textarea.form-control {
+    min-height: 200px;
+}
+.gwu-form .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.gwu-form .btn:focus,
+.gwu-form .btn:active:focus,
+.gwu-form .btn.active:focus,
+.gwu-form .btn.focus,
+.gwu-form .btn:active.focus,
+.gwu-form .btn.active.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.gwu-form .btn:hover,
+.gwu-form .btn:focus,
+.gwu-form .btn.focus {
+    color: #333;
+    text-decoration: none;
+}
+.gwu-form .btn:active,
+.gwu-form .btn.active {
+    outline: 0;
+    background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.gwu-form .btn.disabled,
+.gwu-form .btn[disabled],
+fieldset[disabled] .gwu-form .btn {
+    cursor: not-allowed;
+    zoom: 1;
+    filter: alpha(opacity=65);
+    -webkit-opacity: 0.65;
+    -moz-opacity: 0.65;
+    opacity: 0.65;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+a.gwu-form .btn.disabled,
+fieldset[disabled] a.gwu-form .btn {
+    pointer-events: none;
+}
+.gwu-form .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.gwu-form .btn-default:focus,
+.gwu-form .btn-default.focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #8c8c8c;
+}
+.gwu-form .btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.gwu-form .btn-default:active,
+.gwu-form .btn-default.active,
+.open > .dropdown-toggle.gwu-form .btn-default {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.gwu-form .btn-default:active:hover,
+.gwu-form .btn-default.active:hover,
+.open > .dropdown-toggle.gwu-form .btn-default:hover,
+.gwu-form .btn-default:active:focus,
+.gwu-form .btn-default.active:focus,
+.open > .dropdown-toggle.gwu-form .btn-default:focus,
+.gwu-form .btn-default:active.focus,
+.gwu-form .btn-default.active.focus,
+.open > .dropdown-toggle.gwu-form .btn-default.focus {
+    color: #333;
+    background-color: #d4d4d4;
+    border-color: #8c8c8c;
+}
+.gwu-form .btn-default:active,
+.gwu-form .btn-default.active,
+.open > .dropdown-toggle.gwu-form .btn-default {
+    background-image: none;
+}
+.gwu-form .btn-default.disabled,
+.gwu-form .btn-default[disabled],
+fieldset[disabled] .gwu-form .btn-default,
+.gwu-form .btn-default.disabled:hover,
+.gwu-form .btn-default[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-default:hover,
+.gwu-form .btn-default.disabled:focus,
+.gwu-form .btn-default[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-default:focus,
+.gwu-form .btn-default.disabled.focus,
+.gwu-form .btn-default[disabled].focus,
+fieldset[disabled] .gwu-form .btn-default.focus,
+.gwu-form .btn-default.disabled:active,
+.gwu-form .btn-default[disabled]:active,
+fieldset[disabled] .gwu-form .btn-default:active,
+.gwu-form .btn-default.disabled.active,
+.gwu-form .btn-default[disabled].active,
+fieldset[disabled] .gwu-form .btn-default.active {
+    background-color: #fff;
+    border-color: #ccc;
+}
+.gwu-form .btn-default .badge {
+    color: #fff;
+    background-color: #333;
+}
+.gwu-form .btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.gwu-form .btn-primary:focus,
+.gwu-form .btn-primary.focus {
+    color: #fff;
+    background-color: #286090;
+    border-color: #122b40;
+}
+.gwu-form .btn-primary:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+.gwu-form .btn-primary:active,
+.gwu-form .btn-primary.active,
+.open > .dropdown-toggle.gwu-form .btn-primary {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+.gwu-form .btn-primary:active:hover,
+.gwu-form .btn-primary.active:hover,
+.open > .dropdown-toggle.gwu-form .btn-primary:hover,
+.gwu-form .btn-primary:active:focus,
+.gwu-form .btn-primary.active:focus,
+.open > .dropdown-toggle.gwu-form .btn-primary:focus,
+.gwu-form .btn-primary:active.focus,
+.gwu-form .btn-primary.active.focus,
+.open > .dropdown-toggle.gwu-form .btn-primary.focus {
+    color: #fff;
+    background-color: #204d74;
+    border-color: #122b40;
+}
+.gwu-form .btn-primary:active,
+.gwu-form .btn-primary.active,
+.open > .dropdown-toggle.gwu-form .btn-primary {
+    background-image: none;
+}
+.gwu-form .btn-primary.disabled,
+.gwu-form .btn-primary[disabled],
+fieldset[disabled] .gwu-form .btn-primary,
+.gwu-form .btn-primary.disabled:hover,
+.gwu-form .btn-primary[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-primary:hover,
+.gwu-form .btn-primary.disabled:focus,
+.gwu-form .btn-primary[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-primary:focus,
+.gwu-form .btn-primary.disabled.focus,
+.gwu-form .btn-primary[disabled].focus,
+fieldset[disabled] .gwu-form .btn-primary.focus,
+.gwu-form .btn-primary.disabled:active,
+.gwu-form .btn-primary[disabled]:active,
+fieldset[disabled] .gwu-form .btn-primary:active,
+.gwu-form .btn-primary.disabled.active,
+.gwu-form .btn-primary[disabled].active,
+fieldset[disabled] .gwu-form .btn-primary.active {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.gwu-form .btn-primary .badge {
+    color: #337ab7;
+    background-color: #fff;
+}
+.gwu-form .btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.gwu-form .btn-success:focus,
+.gwu-form .btn-success.focus {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #255625;
+}
+.gwu-form .btn-success:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+.gwu-form .btn-success:active,
+.gwu-form .btn-success.active,
+.open > .dropdown-toggle.gwu-form .btn-success {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+.gwu-form .btn-success:active:hover,
+.gwu-form .btn-success.active:hover,
+.open > .dropdown-toggle.gwu-form .btn-success:hover,
+.gwu-form .btn-success:active:focus,
+.gwu-form .btn-success.active:focus,
+.open > .dropdown-toggle.gwu-form .btn-success:focus,
+.gwu-form .btn-success:active.focus,
+.gwu-form .btn-success.active.focus,
+.open > .dropdown-toggle.gwu-form .btn-success.focus {
+    color: #fff;
+    background-color: #398439;
+    border-color: #255625;
+}
+.gwu-form .btn-success:active,
+.gwu-form .btn-success.active,
+.open > .dropdown-toggle.gwu-form .btn-success {
+    background-image: none;
+}
+.gwu-form .btn-success.disabled,
+.gwu-form .btn-success[disabled],
+fieldset[disabled] .gwu-form .btn-success,
+.gwu-form .btn-success.disabled:hover,
+.gwu-form .btn-success[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-success:hover,
+.gwu-form .btn-success.disabled:focus,
+.gwu-form .btn-success[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-success:focus,
+.gwu-form .btn-success.disabled.focus,
+.gwu-form .btn-success[disabled].focus,
+fieldset[disabled] .gwu-form .btn-success.focus,
+.gwu-form .btn-success.disabled:active,
+.gwu-form .btn-success[disabled]:active,
+fieldset[disabled] .gwu-form .btn-success:active,
+.gwu-form .btn-success.disabled.active,
+.gwu-form .btn-success[disabled].active,
+fieldset[disabled] .gwu-form .btn-success.active {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.gwu-form .btn-success .badge {
+    color: #5cb85c;
+    background-color: #fff;
+}
+.gwu-form .btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.gwu-form .btn-info:focus,
+.gwu-form .btn-info.focus {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #1b6d85;
+}
+.gwu-form .btn-info:hover {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+.gwu-form .btn-info:active,
+.gwu-form .btn-info.active,
+.open > .dropdown-toggle.gwu-form .btn-info {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+.gwu-form .btn-info:active:hover,
+.gwu-form .btn-info.active:hover,
+.open > .dropdown-toggle.gwu-form .btn-info:hover,
+.gwu-form .btn-info:active:focus,
+.gwu-form .btn-info.active:focus,
+.open > .dropdown-toggle.gwu-form .btn-info:focus,
+.gwu-form .btn-info:active.focus,
+.gwu-form .btn-info.active.focus,
+.open > .dropdown-toggle.gwu-form .btn-info.focus {
+    color: #fff;
+    background-color: #269abc;
+    border-color: #1b6d85;
+}
+.gwu-form .btn-info:active,
+.gwu-form .btn-info.active,
+.open > .dropdown-toggle.gwu-form .btn-info {
+    background-image: none;
+}
+.gwu-form .btn-info.disabled,
+.gwu-form .btn-info[disabled],
+fieldset[disabled] .gwu-form .btn-info,
+.gwu-form .btn-info.disabled:hover,
+.gwu-form .btn-info[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-info:hover,
+.gwu-form .btn-info.disabled:focus,
+.gwu-form .btn-info[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-info:focus,
+.gwu-form .btn-info.disabled.focus,
+.gwu-form .btn-info[disabled].focus,
+fieldset[disabled] .gwu-form .btn-info.focus,
+.gwu-form .btn-info.disabled:active,
+.gwu-form .btn-info[disabled]:active,
+fieldset[disabled] .gwu-form .btn-info:active,
+.gwu-form .btn-info.disabled.active,
+.gwu-form .btn-info[disabled].active,
+fieldset[disabled] .gwu-form .btn-info.active {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.gwu-form .btn-info .badge {
+    color: #5bc0de;
+    background-color: #fff;
+}
+.gwu-form .btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.gwu-form .btn-warning:focus,
+.gwu-form .btn-warning.focus {
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #985f0d;
+}
+.gwu-form .btn-warning:hover {
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512;
+}
+.gwu-form .btn-warning:active,
+.gwu-form .btn-warning.active,
+.open > .dropdown-toggle.gwu-form .btn-warning {
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512;
+}
+.gwu-form .btn-warning:active:hover,
+.gwu-form .btn-warning.active:hover,
+.open > .dropdown-toggle.gwu-form .btn-warning:hover,
+.gwu-form .btn-warning:active:focus,
+.gwu-form .btn-warning.active:focus,
+.open > .dropdown-toggle.gwu-form .btn-warning:focus,
+.gwu-form .btn-warning:active.focus,
+.gwu-form .btn-warning.active.focus,
+.open > .dropdown-toggle.gwu-form .btn-warning.focus {
+    color: #fff;
+    background-color: #d58512;
+    border-color: #985f0d;
+}
+.gwu-form .btn-warning:active,
+.gwu-form .btn-warning.active,
+.open > .dropdown-toggle.gwu-form .btn-warning {
+    background-image: none;
+}
+.gwu-form .btn-warning.disabled,
+.gwu-form .btn-warning[disabled],
+fieldset[disabled] .gwu-form .btn-warning,
+.gwu-form .btn-warning.disabled:hover,
+.gwu-form .btn-warning[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-warning:hover,
+.gwu-form .btn-warning.disabled:focus,
+.gwu-form .btn-warning[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-warning:focus,
+.gwu-form .btn-warning.disabled.focus,
+.gwu-form .btn-warning[disabled].focus,
+fieldset[disabled] .gwu-form .btn-warning.focus,
+.gwu-form .btn-warning.disabled:active,
+.gwu-form .btn-warning[disabled]:active,
+fieldset[disabled] .gwu-form .btn-warning:active,
+.gwu-form .btn-warning.disabled.active,
+.gwu-form .btn-warning[disabled].active,
+fieldset[disabled] .gwu-form .btn-warning.active {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.gwu-form .btn-warning .badge {
+    color: #f0ad4e;
+    background-color: #fff;
+}
+.gwu-form .btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.gwu-form .btn-danger:focus,
+.gwu-form .btn-danger.focus {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #761c19;
+}
+.gwu-form .btn-danger:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+.gwu-form .btn-danger:active,
+.gwu-form .btn-danger.active,
+.open > .dropdown-toggle.gwu-form .btn-danger {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+.gwu-form .btn-danger:active:hover,
+.gwu-form .btn-danger.active:hover,
+.open > .dropdown-toggle.gwu-form .btn-danger:hover,
+.gwu-form .btn-danger:active:focus,
+.gwu-form .btn-danger.active:focus,
+.open > .dropdown-toggle.gwu-form .btn-danger:focus,
+.gwu-form .btn-danger:active.focus,
+.gwu-form .btn-danger.active.focus,
+.open > .dropdown-toggle.gwu-form .btn-danger.focus {
+    color: #fff;
+    background-color: #ac2925;
+    border-color: #761c19;
+}
+.gwu-form .btn-danger:active,
+.gwu-form .btn-danger.active,
+.open > .dropdown-toggle.gwu-form .btn-danger {
+    background-image: none;
+}
+.gwu-form .btn-danger.disabled,
+.gwu-form .btn-danger[disabled],
+fieldset[disabled] .gwu-form .btn-danger,
+.gwu-form .btn-danger.disabled:hover,
+.gwu-form .btn-danger[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-danger:hover,
+.gwu-form .btn-danger.disabled:focus,
+.gwu-form .btn-danger[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-danger:focus,
+.gwu-form .btn-danger.disabled.focus,
+.gwu-form .btn-danger[disabled].focus,
+fieldset[disabled] .gwu-form .btn-danger.focus,
+.gwu-form .btn-danger.disabled:active,
+.gwu-form .btn-danger[disabled]:active,
+fieldset[disabled] .gwu-form .btn-danger:active,
+.gwu-form .btn-danger.disabled.active,
+.gwu-form .btn-danger[disabled].active,
+fieldset[disabled] .gwu-form .btn-danger.active {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.gwu-form .btn-danger .badge {
+    color: #d9534f;
+    background-color: #fff;
+}
+.gwu-form .btn-link {
+    color: #337ab7;
+    font-weight: normal;
+    border-radius: 0;
+}
+.gwu-form .btn-link,
+.gwu-form .btn-link:active,
+.gwu-form .btn-link.active,
+.gwu-form .btn-link[disabled],
+fieldset[disabled] .gwu-form .btn-link {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.gwu-form .btn-link,
+.gwu-form .btn-link:hover,
+.gwu-form .btn-link:focus,
+.gwu-form .btn-link:active {
+    border-color: transparent;
+}
+.gwu-form .btn-link:hover,
+.gwu-form .btn-link:focus {
+    color: #23527c;
+    text-decoration: underline;
+    background-color: transparent;
+}
+.gwu-form .btn-link[disabled]:hover,
+fieldset[disabled] .gwu-form .btn-link:hover,
+.gwu-form .btn-link[disabled]:focus,
+fieldset[disabled] .gwu-form .btn-link:focus {
+    color: #777777;
+    text-decoration: none;
+}
+.gwu-form-group {
+    margin-bottom: 15px;
+}
+.gwu-form-group:last-child,
+.gwu-form-group_last {
+    margin-bottom: 0;
+}
+.skin-black .sidebar-form .custom-search-form input {
+    color: #f6f6f6 !important;
+}
+.sonata-ba-list-field-header-batch {
+    width: 35px;
+}
+.sonata-ba-field-inline-table table {
+    margin-bottom: 5px !important;
+}
+.sonata-ba-field-inline-table .input-group.form-control {
+    width: inherit;
+}
+.sonata-ba-field-inline-table textarea.form-control {
+    max-width: 100% !important;
+}
+.sonata-ba-field-inline-table table thead tr th:first-child {
+    width: 35px;
+}
+.tablesorter {
+    background-color: #CDCDCD;
+    width: 100%;
+    text-align: left;
+}
+.tablesorter thead tr th,
+.tablesorter tfoot tr th {
+    background-color: #eee;
+}
+.tablesorter thead tr .header {
+    background-image: url(../images/tablesorter/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+.tablesorter tbody td {
+    background-color: #FFF;
+    vertical-align: top;
+}
+.tablesorter tbody tr.odd td {
+    background-color: #b0b0b0;
+}
+.tablesorter thead tr .headerSortUp {
+    background-image: url(../images/tablesorter/asc.gif);
+}
+.tablesorter thead tr .headerSortDown {
+    background-image: url(../images/tablesorter/desc.gif);
+}
+.tablesorter thead tr .headerSortDown,
+.tablesorter thead tr .headerSortUp {
+    background-color: #e0e0e0;
+}
+.tablesorter-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+    -webkit-overflow-scrolling: touch;
 }

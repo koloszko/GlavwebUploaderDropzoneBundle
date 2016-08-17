@@ -24,7 +24,7 @@
 
             //Init popups
             if(uploader.uploaderOptions.popup) {
-                $(uploader.uploaderOptions.popupContainer).plainModal();
+                $(uploader.uploaderOptions.popup).modal();
             }
             methods.bindEvents();
             _log('init');
@@ -59,11 +59,13 @@
             };
             dropzone.emit('addedfile', mockFile);
 
-            if (uploader.uploaderOptions.isThumbnail) {
+            if (uploader.uploaderOptions.isThumbnail ) {
+                dropzone.emit("thumbnail", mockFile, src);
                 dropzone.createThumbnailFromUrl(mockFile, src);
-            } else {
-                dropzone.emit('thumbnail', mockFile, src);
             }
+            // else {
+            //     dropzone.emit('thumbnail', mockFile, src);
+            // }
 
             var $mockFileTpl = $(mockFile.previewTemplate);
 
@@ -110,11 +112,12 @@
          */
         renameFile: function(fileId, name, description) {
             if(uploader.uploaderOptions.popup) {
-                var $popup = $(uploader.uploaderOptions.popupContainer);
-                $popup.find(uploader.uploaderOptions.name).val(name);
+                var $popup = $(uploader.uploaderOptions.popup);
+                $popup.find(uploader.uploaderOptions.previewShow.filename).val(name);
+
                 $popup.find(uploader.uploaderOptions.description).val(description);
                 $popup.data('file-id', fileId);
-                $popup.plainModal('open')
+                $popup.modal('open');
             } else {
                 var newName = prompt('Новое название', '');
                 var newDescription = prompt('Новое описание', '');
@@ -125,17 +128,19 @@
         saveRenamedFile: function (name, description) {
             var newName,
                 newDescription,
-                fileId = $(this).closest(uploader.uploaderOptions.popupContainer).data('file-id');
+                $popup,
+                fileId = $(uploader.uploaderOptions.popup).data('file-id');
 
             if(uploader.uploaderOptions.popup) {
-                var $popup = $(uploader.uploaderOptions.popupContainer);
-                newName = $popup.find(uploader.uploaderOptions.name).val();
+                $popup = $(uploader.uploaderOptions.popup);
+                newName = $popup.find(uploader.uploaderOptions.previewShow.filename).val();
                 newDescription = $popup.find(uploader.uploaderOptions.description).val()
             } else {
                 newName = name;
                 newDescription = description
             }
 
+            console.log(newName,newDescription);
             if (fileId) {
                 $.post(uploader.uploaderOptions.urls.rename, {
                     id: fileId,
@@ -144,15 +149,22 @@
                     description: newDescription
                 }, function (response) {
                     if (response.success) {
-                        var $preview = $(uploader.uploaderOptions.previewContainer  + '-' +  fileId);
-                        $preview.find(uploader.uploaderOptions.name).text(name);
-                        $preview.find(uploader.uploaderOptions.description).text(description);
+                        //TODO: разобраться с контейтенром превью
+                        var $preview = $('#dz-preview-' +  fileId);
+                        $preview.find(uploader.uploaderOptions.filename).text(newName);
+                        $preview.find(uploader.uploaderOptions.description).text(newDescription);
+                    } else {
+                        _log('error post');
                     }
+                    $popup.modal('close');
                 });
+            } else {
+                _log('error');
             }
 
-            $('#modalRenameFile').modal('hide');
         },
+
+
 
         /**
          * Добавление обработчиков событий
@@ -165,7 +177,7 @@
             });
 
             dropzone.on("success", function (file, response) {
-                //console.log(response);
+                console.log(response);
                 file.response = response;
                 var $template = $(file.previewTemplate);
                 $template.data('id', response.id);
@@ -196,11 +208,13 @@
             $(document).on('click', uploader.uploaderOptions.rename , function () {
                 var $preview = $(this).closest(uploader.uploaderOptions.previewContainer);
                 var fileId = $preview.data('id');
-
                 var name = $preview.find(uploader.uploaderOptions.filename).text().trim();
                 var description = $preview.find(uploader.uploaderOptions.description).text().trim();
-
                 methods.renameFile(fileId, name, description);
+            });
+
+            $(document).on('click', uploader.uploaderOptions.saveRename , function () {
+                methods.saveRenamedFile();
             });
         }
     };

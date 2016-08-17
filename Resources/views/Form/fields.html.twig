@@ -4,16 +4,16 @@
         <input type="hidden" name="_glavweb_uploader_sorted_array[{{ uploaderOptions.type }}]" id = "dz-sorted-array" value="">
 
         <div id="{{ uploaderOptions.dropzoneContainer[1:] }}" class="js-gwu-dropzone">
-            {% include 'GlavwebDropzoneBundle:Form/form:' ~ uploaderOptions.formViewType ~ '.html.twig' %}
+            {% include 'GlavwebUploaderDropzoneBundle:Form/form:' ~ uploaderOptions.formViewType ~ '.html.twig' %}
         </div>
 
-        {% include 'GlavwebDropzoneBundle:Form/item:base.html.twig'  %}
+        {% include 'GlavwebUploaderDropzoneBundle:Form/item:base.html.twig'  %}
 
         <div id="{{ dropzoneOptions.previewsContainer[1:] }}" class="dropzone previews gwu-previews"></div>
     </div>
 
     {% block glavweb_uploader_dropzone_widget__madal %}
-        {% include 'GlavwebDropzoneBundle:Form/modal:popup.html.twig' %}
+        {% include 'GlavwebUploaderDropzoneBundle:Form/modal:popup.html.twig' %}
     {% endblock %}
 
     {% block glavweb_uploader_dropzone_widget__stylesheet %}{% endblock %}

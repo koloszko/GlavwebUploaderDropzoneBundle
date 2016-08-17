@@ -39,9 +39,46 @@ twig:
 
 ```
 
+To add resources to a twig layout 
+
+```
+
+{% block javascripts %}
+
+    ...
+    
+    <script src="{{ asset('bundles/glavwebuploaderdropzone/js/jquery.plainmodal.min.js') }}"></script>
+    <script src="{{ asset('bundles/glavwebuploaderdropzone/js/dropzone.js') }}"></script>
+    <script src="{{ asset('bundles/glavwebuploaderdropzone/js/glavwebUploaderDropzone.js') }}"></script>
+    
+    ...
+    
+{% endblock %}
+ 
+ 
+{% block stylesheets %}
+
+    ...
+    
+    <link rel="stylesheet" href="{{ asset('bundles/glavwebuploaderdropzone/css/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/glavwebuploaderdropzone/css/style.css') }}">
+    
+    ...
+    
+{% endblock %}
+
+```
+
+
 
 ### Execute "assets:install".
 
 ```
 php app/console assets:install
+```
+
+for Symfony3:
+
+```
+php bin/console assets:install
 ```

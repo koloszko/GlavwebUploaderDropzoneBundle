@@ -162,9 +162,14 @@ class DropzoneType extends AbstractType
             ),
             'previewShow'        => array(),
             'previewShowDefault' => array(
+                'filename'        => '.js-gwu-form-name',
+                'fileDescription' => '.js-gwu-form-description',
+                'filenameLabel'        => 'Название',
+                'fileDescriptionLabel' => 'Описание',
                 'isDetails'  => true,
                 'isSize'     => true,
                 'isFilename' => true,
+                'isFileDescription' => true,
                 'isProgress' => true,
                 'isError'    => true,
                 'isShowMark' => true
@@ -179,6 +184,7 @@ class DropzoneType extends AbstractType
                 'upoloaderError'   => '.js-gwu-error',
                 'previewContainer' => '.js-gwu-preview',
                 'rename'           => '.js-gwu-rename',
+                'saveRename'        => '.js-gwu-save-rename',
                 'filename'         => '.js-gwu-filename',
                 'description'      => '.js-gwu-description',
                 'form'             => '.js-gwu-form',

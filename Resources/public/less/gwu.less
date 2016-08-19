@@ -1,5 +1,13 @@
+@import "lesshat";
+@import "variables";
+@import "utilities";
+@import "mixins";
+
 .gwu.gwu-dropzone {
 
+  .dropzone .dz-preview .dz-image {
+    z-index: inherit;
+  }
   .gwu-previews {
     min-height: inherit;
     overflow: hidden;
@@ -20,10 +28,8 @@
     &__image {
       width: 100%;
       height: 100%;
-
       .border-radius(8px);
     }
-
     &__details {
       padding: 30px;
     }

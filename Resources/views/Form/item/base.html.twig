@@ -2,7 +2,7 @@
     <div id="{{ dropzoneOptions.previewTemplate[1:] }}">
 
         {% block glavweb_uploader_preview %}
-            <div class="dz-preview gwu-preview dz-image-preview" data-id="" data-src="">
+            <div class="dz-preview gwu-preview dz-image-preview {{ uploaderOptions.previewContainer[1:] }}" data-id="" data-src="">
                 {% block glavweb_uploader_preview_top %}{% endblock %}
 
                 {% block glavweb_uploader_preview_content %}
@@ -19,25 +19,37 @@
 
                     {% block glavweb_uploader_preview_details %}
                         {% if previewShow.isDetails %}
-                        <div class="dz-details gwu-preview__details">
-                            {% if previewShow.isSize %}
-                                <div class="dz-size gwu-preview-details__size">
-                                    <span data-dz-size=""></span>
-                                </div>
-                            {% endif %}
-                            {% if previewShow.isFilename %}
-                                <div class="dz-filename gwu-preview-details__filename">
-                                    <span data-dz-name="">3.jpg</span>
-                                </div>
-                            {% endif %}
-                            {% block glavweb_upload_item_details_remove %}
-                                <div class="gwu-preview-details__remove">
-                                    <button class="dz-remove btn btn-default gwu-preview-remove" type="button" data-dz-remove>
-                                        <span class="glyphicon glyphicon-remove gwu-preview-remove__icon"></span>
-                                    </button>
-                                </div>
-                            {% endblock %}
-                        </div>
+                            <div class="dz-details gwu-preview__details">
+                                {% if previewShow.isSize %}
+                                    <div class="dz-size gwu-preview-details__size">
+                                        <span data-dz-size=""></span>
+                                    </div>
+                                {% endif %}
+                                {% if previewShow.isFilename %}
+                                    <div class="dz-filename gwu-preview-details__filename">
+                                        <span class="{{ uploaderOptions.filename[1:] }}" data-dz-name=""></span>
+                                    </div>
+                                {% endif %}
+                                {% if previewShow.isFileDescription %}
+                                    <div class="dz-description gwu-preview-details__description">
+                                        <span class="{{ uploaderOptions.description[1:] }}" data-dz-description=""></span>
+                                    </div>
+                                {% endif %}
+                                {% block glavweb_upload_item_details_remove %}
+                                    <div class="gwu-preview-details__remove">
+                                        <button class="dz-remove btn btn-default gwu-preview-remove" type="button" data-dz-remove>
+                                            <span class="glyphicon glyphicon-remove gwu-preview-remove__icon"></span>
+                                        </button>
+                                    </div>
+                                {% endblock %}
+                                {% block glavweb_upload_item_details_rename %}
+                                    <div class="gwu-preview-details__rename">
+                                        <button class="dz-remove btn btn-default gwu-preview-rename {{ uploaderOptions.rename[1:] }}" type="button">
+                                            <span class="glyphicon glyphicon-pencil gwu-preview-rename__icon"></span>
+                                        </button>
+                                    </div>
+                                {% endblock %}
+                            </div>
                         {% endif %}
                     {% endblock %}
 
@@ -72,7 +84,6 @@
                                 </div>
                                 <div class="dz-error-mark">
                                     <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                                        <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                                         <title>error</title>
                                         <desc>Created with Sketch.</desc>
                                         <defs></defs>
@@ -82,7 +93,6 @@
                                             </g>
                                         </g>
                                     </svg>
-
                                 </div>
                             </div>
                         {% endif %}

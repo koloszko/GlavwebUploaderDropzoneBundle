@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Glavweb\UploaderBundle\Helper\MediaHelper;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class DropzoneType
@@ -43,7 +43,7 @@ class DropzoneType extends AbstractType
     protected $driverAnnotation;
 
     /**
-     * @var DataCollectorTranslator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -53,7 +53,7 @@ class DropzoneType extends AbstractType
      * @param array $config
      * @param AnnotationDriver $driverAnnotation
      */
-    public function __construct(Router $router, MediaHelper $mediaHelper, array $config, AnnotationDriver $driverAnnotation, DataCollectorTranslator $translator)
+    public function __construct(Router $router, MediaHelper $mediaHelper, array $config, AnnotationDriver $driverAnnotation, TranslatorInterface $translator)
     {
         $this->router           = $router;
         $this->mediaHelper      = $mediaHelper;

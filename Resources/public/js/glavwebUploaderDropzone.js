@@ -24,7 +24,7 @@
 
             //Init popups
             if(uploader.uploaderOptions.popup) {
-                $(uploader.uploaderOptions.popup).modal();
+                $(uploader.uploaderOptions.popup).plainModal();
             }
             methods.bindEvents();
             _log('init');
@@ -117,7 +117,7 @@
 
                 $popup.find(uploader.uploaderOptions.description).val(description);
                 $popup.data('file-id', fileId);
-                $popup.modal('open');
+                $popup.plainModal('open');
             } else {
                 var newName = prompt('Новое название', '');
                 var newDescription = prompt('Новое описание', '');
@@ -156,7 +156,7 @@
                     } else {
                         _log('error post');
                     }
-                    $popup.modal('close');
+                    $popup.plainModal('close');
                 });
             } else {
                 _log('error');

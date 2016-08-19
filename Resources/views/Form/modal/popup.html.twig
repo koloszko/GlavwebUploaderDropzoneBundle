@@ -1,3 +1,30 @@
-<div class="js-glavweb-popup glavweb-popup">
-    <div class="js-glavweb-popup-content glavweb-popup__content"></div>
+<div class="{{ uploaderOptions.popup[1:] }} gwu-popup">
+    <div class="gwu-popup__content">
+        <div class="gwu-form">
+            <div class="gwu-form-group">
+                <div class="gwu-form-label">
+                    <label for="gwu-form-name" class="control-label">
+                        {{ uploaderOptions.previewShow.filenameLabel }}
+                    </label>
+                </div>
+                <div class="gwu-form-control">
+                    <input id="gwu-form-name" class="form-control {{ uploaderOptions.previewShow.filename[1:] }}" type="text" name="{{ uploaderOptions.previewShow.filename[3:] }}">
+                </div>
+            </div>
+            <div class="gwu-form-group">
+                <div class="gwu-form-label">
+                    <label for="description" class="control-label">
+                        {{ uploaderOptions.previewShow.fileDescriptionLabel }}
+                    </label>
+                </div>
+                <div class="gwu-form-control">
+                    <textarea rows="12" placeholder="Введите описание изображения" name="{{ uploaderOptions.previewShow.fileDescription[3:] }}" id="gwu-form-description" class="form-control {{ uploaderOptions.previewShow.fileDescription[1:] }}">
+                    </textarea>
+                </div>
+            </div>
+
+            <button type="button" class="gwu-form-submit btn btn-success  {{ uploaderOptions.saveRename[1:] }}">Сохранить</button>
+            <button type="button" class="btn btn-warning plainmodal-close">Отмена</button>
+        </div>
+    </div>
 </div>

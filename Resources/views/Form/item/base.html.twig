@@ -19,37 +19,37 @@
 
                     {% block glavweb_uploader_preview_details %}
                         {% if previewShow.isDetails %}
-                            <div class="dz-details gwu-preview__details">
-                                {% if previewShow.isSize %}
-                                    <div class="dz-size gwu-preview-details__size">
-                                        <span data-dz-size=""></span>
-                                    </div>
-                                {% endif %}
-                                {% if previewShow.isFilename %}
-                                    <div class="dz-filename gwu-preview-details__filename">
-                                        <span class="{{ uploaderOptions.filename[1:] }}" data-dz-name=""></span>
-                                    </div>
-                                {% endif %}
-                                {% if previewShow.isFileDescription %}
-                                    <div class="dz-description gwu-preview-details__description">
-                                        <span class="{{ uploaderOptions.description[1:] }}" data-dz-description=""></span>
-                                    </div>
-                                {% endif %}
-                                {% block glavweb_upload_item_details_remove %}
-                                    <div class="gwu-preview-details__remove">
-                                        <button class="dz-remove btn btn-default gwu-preview-remove" type="button" data-dz-remove>
-                                            <span class="glyphicon glyphicon-remove gwu-preview-remove__icon"></span>
-                                        </button>
-                                    </div>
-                                {% endblock %}
-                                {% block glavweb_upload_item_details_rename %}
-                                    <div class="gwu-preview-details__rename">
-                                        <button class="dz-remove btn btn-default gwu-preview-rename {{ uploaderOptions.rename[1:] }}" type="button">
-                                            <span class="glyphicon glyphicon-pencil gwu-preview-rename__icon"></span>
-                                        </button>
-                                    </div>
-                                {% endblock %}
-                            </div>
+                        <div class="dz-details gwu-preview__details">
+                            {% if previewShow.isSize %}
+                                <div class="dz-size gwu-preview-details__size">
+                                    <span data-dz-size=""></span>
+                                </div>
+                            {% endif %}
+                            {% if previewShow.isFilename %}
+                                <div class="dz-filename gwu-preview-details__filename">
+                                    <span class="{{ uploaderOptions.filename[1:] }}" data-dz-name=""></span>
+                                </div>
+                            {% endif %}
+                            {% if previewShow.isFileDescription %}
+                                <div class="dz-description gwu-preview-details__description">
+                                    <span class="{{ uploaderOptions.description[1:] }}" data-dz-description=""></span>
+                                </div>
+                            {% endif %}
+                            {% block glavweb_upload_item_details_remove %}
+                                <div class="gwu-preview-details__remove">
+                                    <button class="dz-remove btn btn-default gwu-preview-remove" type="button" data-dz-remove>
+                                        <span class="glyphicon glyphicon-remove gwu-preview-remove__icon"></span>
+                                    </button>
+                                </div>
+                            {% endblock %}
+                            {% block glavweb_upload_item_details_rename %}
+                                <div class="gwu-preview-details__rename">
+                                    <button class="dz-remove btn btn-default gwu-preview-rename {{ uploaderOptions.rename[1:] }}" type="button">
+                                        <span class="glyphicon glyphicon-pencil gwu-preview-rename__icon"></span>
+                                    </button>
+                                </div>
+                            {% endblock %}
+                        </div>
                         {% endif %}
                     {% endblock %}
 

@@ -86,7 +86,7 @@ class DropzoneType extends AbstractType
             throw new NotFoundPropertiesInAnnotationException();
         }
 
-        $files = $entity->$dataPropertyAnnotation['nameGetFunction']();
+        $files = $entity->{$dataPropertyAnnotation['nameGetFunction']}();
         $context = $dataPropertyAnnotation['mapping'];
 
         if (!$context) {

@@ -7,12 +7,12 @@ use Glavweb\UploaderBundle\Exception\ClassNotUploadableException;
 use Glavweb\UploaderBundle\Exception\MappingNotSetException;
 use Glavweb\UploaderBundle\Exception\NotFoundPropertiesInAnnotationException;
 use Glavweb\UploaderBundle\Exception\ValueEmptyException;
+use Oneup\UploaderBundle\Templating\Helper\UploaderHelper;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Glavweb\UploaderBundle\Helper\MediaHelper;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -33,9 +33,9 @@ class DropzoneType extends AbstractType
     protected $router;
 
     /**
-     * @var MediaHelper
+     * @var UploaderHelper
      */
-    protected $mediaHelper;
+    protected $uploaderHelper;
 
     /**
      * @var AnnotationDriver;
@@ -49,14 +49,13 @@ class DropzoneType extends AbstractType
 
     /**
      * @param Router $router
-     * @param MediaHelper $mediaHelper
      * @param array $config
      * @param AnnotationDriver $driverAnnotation
      */
-    public function __construct(Router $router, MediaHelper $mediaHelper, array $config, AnnotationDriver $driverAnnotation, TranslatorInterface $translator)
+    public function __construct(Router $router, UploaderHelper $uploaderHelper, array $config, AnnotationDriver $driverAnnotation, TranslatorInterface $translator)
     {
         $this->router           = $router;
-        $this->mediaHelper      = $mediaHelper;
+        $this->uploaderHelper   = $uploaderHelper;
         $this->config           = $config;
         $this->driverAnnotation = $driverAnnotation;
         $this->translator       = $translator;
@@ -92,13 +91,11 @@ class DropzoneType extends AbstractType
         if (!$context) {
             throw new MappingNotSetException();
         }
-
         $config = $this->getConfigByContext($context);
 
         $router    = $this->router;
-        $uploadDir = $this->mediaHelper->getUploadDirectoryUrl($context);
         $urls      = array(
-            'upload' => $router->generate('glavweb_uploader_upload', array('context' => $context)),
+            'upload' => $this->uploaderHelper->endpoint($context),
             'rename' => $router->generate('glavweb_uploader_rename', array('context' => $context)),
             'delete' => $router->generate('glavweb_uploader_delete', array('context' => $context)),
         );
@@ -107,13 +104,11 @@ class DropzoneType extends AbstractType
         $view->vars['views']            = $options['views' ];
         $view->vars['type']             = $context;
         $view->vars['files']            = $files;
-        // $view->vars['previewImg']    = $options['previewImg'];
         $view->vars['previewShow']      = array_merge($options['previewShowDefault'],$options['previewShow']);
 
         // Dropzone
         $view->vars['dropzoneOptions'] = array_merge($options['dropzoneOptionsDefault'], array(
             'url'               => $urls['upload'],
-            'uploadDir'         => $uploadDir,
             'previewTemplate'   => '#js-gwu-template_' . $options['requestId'],
             'previewsContainer' => '#js-gwu-previews_' . $options['requestId'],
             'form'              => '.js-gwu-from_' . $options['requestId'],
@@ -128,7 +123,6 @@ class DropzoneType extends AbstractType
             'requestId'         => $options['requestId'],
             'dropzoneContainer' => '#js-gwu-dropzone_' . $options['requestId'],
             'previewShow'       => $view->vars['previewShow'],
-            'uploadDir'         => $uploadDir,
             'countFiles'        => $files->count(),
             'maxFiles'          => $view->vars['dropzoneOptions']['maxFiles'],
             'type'              => $context,
@@ -164,12 +158,12 @@ class DropzoneType extends AbstractType
             'previewShowDefault' => array(
                 'filename'        => '.js-gwu-form-name',
                 'fileDescription' => '.js-gwu-form-description',
-                'filenameLabel'        => 'Название',
-                'fileDescriptionLabel' => 'Описание',
+                'filenameLabel'        => 'Nazwa',
+                'fileDescriptionLabel' => 'Оpis',
                 'isDetails'  => true,
                 'isSize'     => true,
                 'isFilename' => true,
-                'isFileDescription' => true,
+                'isFileDescription' => false,
                 'isProgress' => true,
                 'isError'    => true,
                 'isShowMark' => true
@@ -198,7 +192,9 @@ class DropzoneType extends AbstractType
                 'isThumbnail'      => true,
                 'isUploadButton'   => true,
                 'thumbnailOptions' => array(),
-                'countFiles'       => 0
+                'countFiles'       => 0,
+                'enableRename'     => false,
+                'underLabel'       => false,
             ),
             'dropzoneOptions'    => array(),
             'dropzoneOptionsDefault' => array(
@@ -207,7 +203,7 @@ class DropzoneType extends AbstractType
                 'previewsContainer'            => null,
                 'clickable'                    => null,
                 'maxFilesize'                  => 2,
-                'maxFiles'                     => 20,
+                'maxFiles'                     => 1,
                 'thumbnailWidth'               => 350,
                 'thumbnailHeight'              => 350,
                 'parallelUploads'              => 20,
@@ -242,26 +238,6 @@ class DropzoneType extends AbstractType
     public function getBlockPrefix()
     {
         return 'glavweb_uploader_dropzone';
-    }
-
-    /**
-     * @param  $files
-     * @return array
-     */
-    protected function prepareFiles($files)
-    {
-//        if (isset($files[0]) && $files[0] instanceof File) {
-//            return array_map(function($file) {
-//                return array(
-//                    'id'   => $file->getId(),
-//                    'path' => $this->mediaHelper->getWebPath($file),
-//                    'name' => $file->getClientName()
-//                );
-//            }, $files);
-//
-//        }
-
-        return $files;
     }
 
     /**

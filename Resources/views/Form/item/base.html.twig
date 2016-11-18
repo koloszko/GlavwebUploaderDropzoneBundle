@@ -38,16 +38,18 @@
                             {% block glavweb_upload_item_details_remove %}
                                 <div class="gwu-preview-details__remove">
                                     <button class="dz-remove btn btn-default gwu-preview-remove" type="button" data-dz-remove>
-                                        <span class="glyphicon glyphicon-remove gwu-preview-remove__icon"></span>
+                                        <span class="glyphicon gwu-preview-remove__icon">{{ 'dropzone.delete'|trans }}</span>
                                     </button>
                                 </div>
                             {% endblock %}
                             {% block glavweb_upload_item_details_rename %}
-                                <div class="gwu-preview-details__rename">
-                                    <button class="dz-remove btn btn-default gwu-preview-rename {{ uploaderOptions.rename[1:] }}" type="button">
-                                        <span class="glyphicon glyphicon-pencil gwu-preview-rename__icon"></span>
-                                    </button>
-                                </div>
+                                {% if uploaderOptions.enableRename %}
+                                    <div class="gwu-preview-details__rename">
+                                        <button class="dz-remove btn btn-default gwu-preview-rename {{ uploaderOptions.rename[1:] }}" type="button">
+                                            <span class="glyphicon glyphicon-pencil gwu-preview-rename__icon"></span>
+                                        </button>
+                                    </div>
+                                {% endif %}
                             {% endblock %}
                         </div>
                         {% endif %}

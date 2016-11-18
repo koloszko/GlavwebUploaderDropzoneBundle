@@ -1,0 +1,21 @@
+dropzone:
+    modal_close:                     Zamknij
+    files_uploaded:                  Pliki zostały załadowane
+    browser_not_support_drag_n_drop: "Twoja przeglądarka nie wspiera przeciągnij i upuść."
+    file_size_too_large:             Zbyt duży rozmiar pliku.
+    wrong_format:                    Niedozwolony format pliku.
+    disable_adblocker:               Prawdopodobnie masz zainstalowanego Adblockera. Wyłącz go dla tej strony.
+    cancel_upload:                   Anuluj pobieranie
+    cancel_upload_confirmation:      Czy na pewno anulować pobieranie?
+    remove_file:                     Usuń plik
+    max_files_exceeded:              Przekroczona maksymalna dopuszczalna liczba plików.
+    drag_or_click_files:             Przeciągnij tu zdjęcie (lub kliknij)
+    insert_link:                     Wklej link
+    image_url:                       URL obrazka
+    download:                        Pobierz
+    downloading:                     Pobieranie
+    url_must_contain_link_image:     URL musi zawierać link do zdjęcia.
+    delete:                          Usuń
+    cancel:                          Anuluj
+    edit:                            Edytuj
+    save:                            Zapisz

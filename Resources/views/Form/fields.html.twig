@@ -11,6 +11,7 @@
 
         <div id="{{ dropzoneOptions.previewsContainer[1:] }}" class="dropzone previews gwu-previews"></div>
     </div>
+    <div class="gwu-dropzone-underlabel">{{ uploaderOptions.underLabel }}</div>
 
     {% block glavweb_uploader_dropzone_widget__madal %}
         {% include 'GlavwebUploaderDropzoneBundle:Form/modal:popup.html.twig' %}
@@ -30,7 +31,7 @@
                     });
 
                     {% for media in files %}
-                        {% set imgSrc = media|glavweb_uploader_thumbnail %}
+                        {% set imgSrc = (media.context ~ '/' ~ media.thumbnailPath)|image(uploaderOptions.type) %}
                         $uploader.glavwebUploaderDropzone('addFile','{{ media.name }}', {{ media.id }}, '{{ imgSrc }}', {{ media.contentSize }} );
                     {% endfor %}
                 });

@@ -122,6 +122,9 @@ class UploaderManager extends BaseUploaderManager
             foreach ($files as $file) {
                 $storage->removeFile($file);
             }
+        } elseif ($storageConfig['type'] == 'flysystem') {
+            $filesystem  = $this->container->get($storageConfig['filesystem']);
+            $filesystem->delete($media->getContentPath());
         }
     }
 

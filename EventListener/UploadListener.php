@@ -4,10 +4,10 @@ namespace Glavweb\UploaderDropzoneBundle\EventListener;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Glavweb\UploaderBundle\Entity\Media;
 use Glavweb\UploaderBundle\Model\OrmModelManager;
 use Oneup\UploaderBundle\Event\PostUploadEvent;
 use Oneup\UploaderBundle\Event\PreUploadEvent;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadListener
 {
@@ -22,10 +22,10 @@ class UploadListener
     private $modelManager;
 
     /**
-     * @var UploadedFile
+     * @var Media
      */
-    private $processedFile;
-    private $processedFileMimeType;
+    private $media;
+
     
     public function __construct(ObjectManager $om, OrmModelManager $modelManager)
     {
@@ -34,9 +34,13 @@ class UploadListener
     }
 
     public function preUpload(PreUploadEvent $event) {
-        $this->processedFile = $event->getFile();
+        $processedFile = $event->getFile();
+
         /* Zapamiętujemy te info w preUpload, bo w postUpdate się wywala */
-        $this->processedFileMimeType = $this->processedFile->getMimeType();
+        $this->media = $this->modelManager->createMedia();
+        $this->media->setName($processedFile->getClientOriginalName());
+        $this->media->setContentType($processedFile->getMimeType());
+        $this->media->setContentSize($processedFile->getSize());
     }
         
     public function postUpload(PostUploadEvent $event)
@@ -44,22 +48,18 @@ class UploadListener
         $uploadedFile = $event->getFile();
         $contentPath = basename($uploadedFile->getPathname());
 
-        $media = $this->modelManager->createMedia();
-        $media->setContext($event->getType());
-        $media->setProviderName($event->getType());
-        $media->setContentPath($contentPath);
-        $media->setThumbnailPath($contentPath);
-        $media->setName($this->processedFile->getClientOriginalName());
-        $media->setContentType($this->processedFileMimeType);
-        $media->setContentSize($this->processedFile->getSize());
-        $media->setIsOrphan(true);
-        $media->setRequestId($event->getRequest()->get('_glavweb_uploader_request_id'));
-        $this->modelManager->updateMedia($media, true);
+        $this->media->setContext($event->getType());
+        $this->media->setProviderName($event->getType());
+        $this->media->setContentPath($contentPath);
+        $this->media->setThumbnailPath($contentPath);
+        $this->media->setIsOrphan(true);
+        $this->media->setRequestId($event->getRequest()->get('_glavweb_uploader_request_id'));
+        $this->modelManager->updateMedia($this->media, true);
 
-        $this->processedFile = null;
         $response = $event->getResponse();
-        $response['id']          = $media->getId();
+        $response['id']          = $this->media->getId();
         $response['contentPath'] = '';
+        $this->media = null;
     }
 
 }

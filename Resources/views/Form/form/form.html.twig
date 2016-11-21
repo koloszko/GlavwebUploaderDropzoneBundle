@@ -1,3 +1,4 @@
-<div class="gwu-dropzone-area {{ uploaderOptions.form[1:] }} {{ uploaderOptions.clickable[1:] }} needsclick {% if uploaderOptions.countFiles >= uploaderOptions.maxFiles %}hidden{% endif %}">
-    {{ 'dropzone.drag_or_click_files'|trans }}
+<div class="gwu-dropzone-area {{ uploaderOptions.form[1:] }} {{ uploaderOptions.clickable[1:] }} needsclick">
+    <div id="{{ dropzoneOptions.previewsContainer[1:] }}" class="dropzone previews gwu-previews"></div>
+    <span class="dropzone-area-text {% if uploaderOptions.countFiles > 0 %}hidden{% endif %}">{{ 'dropzone.drag_or_click_files'|trans }}</span>
 </div>

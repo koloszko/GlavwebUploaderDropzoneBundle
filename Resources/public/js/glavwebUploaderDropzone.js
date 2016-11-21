@@ -171,6 +171,9 @@
          */
         bindEvents: function () {
 
+            dropzone.on("addedfile", function (file, xhr, formData) {
+                $('.dropzone-area-text').addClass('hidden');
+            });
             dropzone.on("sending", function (file, xhr, formData) {
                 $(uploader.uploaderOptions.preloader).removeClass('hidden');
                 formData.append('_glavweb_uploader_request_id', uploader.uploaderOptions.requestId);
@@ -203,6 +206,9 @@
 
                 //TODO: поставить нормалный обработчик событий для скрытия ошибок
                 methods.hideErrors();
+                if ($('.dz-preview').length == 0) {
+                    $('.dropzone-area-text').removeClass('hidden');
+                }
             });
 
             $(document).on('click', uploader.uploaderOptions.rename , function () {

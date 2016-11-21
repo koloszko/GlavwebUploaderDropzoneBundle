@@ -10,6 +10,7 @@ use Glavweb\UploaderBundle\Exception\ValueEmptyException;
 use Oneup\UploaderBundle\Templating\Helper\UploaderHelper;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -229,7 +230,7 @@ class DropzoneType extends AbstractType
      */
     public function getParent()
     {
-        return 'form';
+        return FormType::class;
     }
 
     /**

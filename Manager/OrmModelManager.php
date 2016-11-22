@@ -23,15 +23,17 @@ class OrmModelManager extends \Glavweb\UploaderBundle\Model\OrmModelManager
         $changesAffected = false;
         foreach ($rows as $row) {
             if ($row && $row->getMedia()->getContext() == $context) {
-                $em->detach($entity);
                 $media = $row->getMedia();
                 $em->remove($media);
                 $changesAffected = true;
             }
         }
 
-        if ($changesAffected && $andFlush) {
-            $em->flush();
+        if ($changesAffected) {
+            $em->detach($entity);
+            if ($andFlush) {
+                $em->flush();
+            }
         }
     }
 }

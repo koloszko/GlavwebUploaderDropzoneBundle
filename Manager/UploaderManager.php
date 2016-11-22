@@ -8,9 +8,11 @@
 
 namespace Glavweb\UploaderDropzoneBundle\Manager;
 
+use Doctrine\Common\Collections\Collection;
 use Glavweb\UploaderBundle\Exception\MappingNotSetException;
 use Glavweb\UploaderBundle\Manager\UploaderManager as BaseUploaderManager;
 use Glavweb\UploaderBundle\Model\MediaInterface;
+use Glavweb\UploaderDropzoneBundle\Exception\TooManyFilesUploadedException;
 
 class UploaderManager extends BaseUploaderManager
 {
@@ -32,7 +34,7 @@ class UploaderManager extends BaseUploaderManager
         $this->modelManager = $modelManager;
     }
 
-    public function handleUpload($entity, $requestId=null, $options = array())
+    public function handleUpload($entity, $requestId = null, $options = array())
     {
         $request = $this->getRequestStack()->getCurrentRequest();
         $requestId = $request->get('_glavweb_uploader_request_id');
@@ -46,16 +48,18 @@ class UploaderManager extends BaseUploaderManager
 
         foreach ($data as $property) {
             $context = $property['mapping'];
-            
-            $this->removeMedia($entity, $context, $requestId);
+
+            $this->removeMedia($entity, $context, $requestId, $property);
             $this->renameMarkedMedia($context, $requestId);
             $uploadedMediaEntities = $this->uploadOrphans($context, $requestId);
 
-            $this->addMedia($uploadedMediaEntities, $entity, $property );
-
-            $positions = explode(',', $request->get('_glavweb_uploader_sorted_array')[$context]);
+            $this->addMedia($uploadedMediaEntities, $entity, $property);
+            
             $mediaEntities = $entity->{$property['nameGetFunction']}();
-            $this->sortMedia($mediaEntities, $positions);
+            if ($mediaEntities instanceof Collection) {
+                $positions = explode(',', $request->get('_glavweb_uploader_sorted_array')[$context]);
+                $this->sortMedia($mediaEntities, $positions);
+            }
         }
     }
 
@@ -64,6 +68,7 @@ class UploaderManager extends BaseUploaderManager
      * @param $entity
      * @param $property
      * @throws MappingNotSetException
+     * @throws TooManyFilesUploadedException
      * @internal param $property 
      */
     protected function addMedia($mediaEntities, $entity, $property)
@@ -85,25 +90,34 @@ class UploaderManager extends BaseUploaderManager
 
         $entityMedia = $entity->$nameGetFunction();
 
-        $maxFiles = $maxFiles - $entityMedia->count();
-
-        if (!empty($mediaEntities)) {
-            foreach ($mediaEntities as $mediaEntity) {
-                if ($maxFiles == 0) {
-                    break;
+        if ($entityMedia instanceof Collection) {
+            $maxFiles = $maxFiles - $entityMedia->count();
+            if (!empty($mediaEntities)) {
+                foreach ($mediaEntities as $mediaEntity) {
+                    if ($maxFiles == 0) {
+                        break;
+                    }
+                    $entity->$nameAddFunction($mediaEntity);
+                    $maxFiles--;
                 }
-                $entity->$nameAddFunction($mediaEntity);
-                $maxFiles--;
+            }
+        } else {
+            if (count($mediaEntities) > 1) {
+                throw new TooManyFilesUploadedException();
+            }
+            if (count($mediaEntities) === 1) {
+                $entity->$nameAddFunction($mediaEntities[0]);
             }
         }
+
     }
 
     public function removeMediaFromStorage(MediaInterface $media)
     {
-        $context  = $media->getContext();
+        $context = $media->getContext();
         $storageConfig = $this->getContextConfig($context, 'storage');
         if ($storageConfig['type'] == 'filesystem') {
-            $storage  = $this->container->get('glavweb_uploader.storage.filesystem');
+            $storage = $this->container->get('glavweb_uploader.storage.filesystem');
             $directory = $storageConfig['directory'];
             $files = array();
             if (($contentPath = $media->getContentPath())) {
@@ -122,13 +136,13 @@ class UploaderManager extends BaseUploaderManager
                 $storage->removeFile($file);
             }
         } elseif ($storageConfig['type'] == 'flysystem') {
-            $filesystem  = $this->container->get($storageConfig['filesystem']);
+            $filesystem = $this->container->get($storageConfig['filesystem']);
             $filesystem->delete($media->getContentPath());
         }
     }
 
-    public function removeMedia($entity, $context, $requestId)
+    public function removeMedia($entity, $context, $requestId, $property)
     {
-        $this->modelManager->removeMedia($entity, $context, $requestId);
+        $this->modelManager->removeMedia($entity, $context, $requestId, $property);
     }
 }

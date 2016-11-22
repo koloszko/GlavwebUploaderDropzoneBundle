@@ -2,6 +2,8 @@
 
 namespace Glavweb\UploaderDropzoneBundle\Form\Type;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Glavweb\UploaderBundle\Driver\AnnotationDriver;
 use Glavweb\UploaderBundle\Exception\ClassNotUploadableException;
 use Glavweb\UploaderBundle\Exception\MappingNotSetException;
@@ -87,6 +89,13 @@ class DropzoneType extends AbstractType
         }
 
         $files = $entity->{$dataPropertyAnnotation['nameGetFunction']}();
+        if (!$files instanceof Collection) {
+            $fakeFiles = new ArrayCollection();
+            if ($files) {
+                $fakeFiles->add($files);
+            }
+            $files = $fakeFiles;
+        }
         $context = $dataPropertyAnnotation['mapping'];
 
         if (!$context) {

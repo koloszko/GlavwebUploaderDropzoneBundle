@@ -53,10 +53,9 @@ class UploaderManager extends BaseUploaderManager
 
             $this->addMedia($uploadedMediaEntities, $entity, $property );
 
-            // TODO: Sorting does not work properly - after removing media it is added again
-            //$positions = explode(',', $request->get('_glavweb_uploader_sorted_array')[$context]);
-            //$mediaEntities = $entity->{$property['nameGetFunction']}();
-            //$this->sortMedia($mediaEntities, $positions);
+            $positions = explode(',', $request->get('_glavweb_uploader_sorted_array')[$context]);
+            $mediaEntities = $entity->{$property['nameGetFunction']}();
+            $this->sortMedia($mediaEntities, $positions);
         }
     }
 

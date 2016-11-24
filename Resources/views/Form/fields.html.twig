@@ -1,17 +1,21 @@
 {% block glavweb_uploader_dropzone_widget %}
-    <div class="gwu gwu-dropzone {{ uploaderOptions.uploaderClass }}">
-        <input type="hidden" name="_glavweb_uploader_request_id" value="{{ requestId }}">
-        <input type="hidden" name="_glavweb_uploader_sorted_array[{{ uploaderOptions.type }}]" id = "dz-sorted-array" value="">
+    {% block glavweb_uploader_dropzone_widget__main %}
+        <div class="gwu gwu-dropzone {{ uploaderOptions.uploaderClass }}">
+            <input type="hidden" name="_glavweb_uploader_request_id" value="{{ requestId }}">
+            <input type="hidden" name="_glavweb_uploader_sorted_array[{{ uploaderOptions.type }}]" id = "dz-sorted-array" value="">
 
-        <div id="{{ uploaderOptions.dropzoneContainer[1:] }}" class="js-gwu-dropzone">
-            {% include 'GlavwebUploaderDropzoneBundle:Form/form:' ~ uploaderOptions.formViewType ~ '.html.twig' %}
+            <div id="{{ uploaderOptions.dropzoneContainer[1:] }}" class="js-gwu-dropzone">
+                {% include 'GlavwebUploaderDropzoneBundle:Form/form:' ~ uploaderOptions.formViewType ~ '.html.twig' %}
+            </div>
+
+            {% include 'GlavwebUploaderDropzoneBundle:Form/item:base.html.twig'  %}
+
+            <div id="{{ dropzoneOptions.previewsContainer[1:] }}" class="dropzone previews gwu-previews"></div>
         </div>
-
-        {% include 'GlavwebUploaderDropzoneBundle:Form/item:base.html.twig'  %}
-
-        {#<div id="{{ dropzoneOptions.previewsContainer[1:] }}" class="dropzone previews gwu-previews"></div>#}
-    </div>
-    <div class="gwu-dropzone-underlabel">{{ uploaderOptions.underLabel }}</div>
+    {% endblock %}
+    {% if uploaderOptions.underLabel %}
+        <div class="gwu-dropzone-underlabel">{{ uploaderOptions.underLabel }}</div>
+    {% endif %}
 
     {% block glavweb_uploader_dropzone_widget__madal %}
         {% include 'GlavwebUploaderDropzoneBundle:Form/modal:popup.html.twig' %}

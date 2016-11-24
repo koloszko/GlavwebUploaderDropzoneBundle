@@ -21,7 +21,7 @@
             uploader.dropzoneOptions.previewTemplate = $template.html();
             $template.remove();
             dropzone = new Dropzone(uploader.uploaderOptions.dropzoneContainer, uploader.dropzoneOptions);
-
+            this.data('dropzone', dropzone);
             //Init popups
             if(uploader.uploaderOptions.popup) {
                 $(uploader.uploaderOptions.popup).plainModal();
@@ -171,7 +171,7 @@
          */
         bindEvents: function () {
 
-            dropzone.on("addedfile", function (file, xhr, formData) {
+            dropzone.on("addedfile", function () {
                 $('.dropzone-area-text').addClass('hidden');
             });
             dropzone.on("sending", function (file, xhr, formData) {
@@ -188,6 +188,7 @@
                 $template.attr('id', uploader.uploaderOptions.previewContainer.slice(1)  + '-' + response.id);
                 //????$(file.previewTemplate).find('.dz-filename span').text('');
                 //formSortedArray();
+                $template.trigger('dropzone_success', [response]);
                 methods.hideErrors();
             });
 

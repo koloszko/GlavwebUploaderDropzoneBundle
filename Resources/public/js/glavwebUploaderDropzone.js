@@ -18,6 +18,7 @@
         init: function (options) {
             uploader = $.extend({}, defaults, options);
             var $template = $(uploader.dropzoneOptions.previewTemplate);
+            $template.removeClass('hidden');
             uploader.dropzoneOptions.previewTemplate = $template.html();
             $template.remove();
             dropzone = new Dropzone(uploader.uploaderOptions.dropzoneContainer, uploader.dropzoneOptions);
